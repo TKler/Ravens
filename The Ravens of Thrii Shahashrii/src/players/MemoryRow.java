@@ -12,7 +12,7 @@ import cards.Raven;
 
 public class MemoryRow 
 {
-	int _cardsDrawn, _numberOfRavens;
+	int _cardsDrawn, _sizeOfSafeSpace;
 	ArrayList<MemoryCard> _list;
 	ArrayList<Raven> _drawnInsideSafe;
 	ArrayList<Raven> _drawnOutsideSafe;
@@ -24,7 +24,7 @@ public class MemoryRow
 		_drawnInsideSafe = new ArrayList<Raven>(5);
 		_drawnOutsideSafe = new ArrayList<Raven>(5);
 		_cardsDrawn = 0;
-		_numberOfRavens = 0;
+		_sizeOfSafeSpace = 0;
 	}
 
 	public void addCard(Card card)
@@ -33,7 +33,7 @@ public class MemoryRow
 		
 		if(card.isRaven())
 		{
-			if(_cardsDrawn <= _numberOfRavens)
+			if(_cardsDrawn <= _sizeOfSafeSpace)
 				_drawnInsideSafe.add((Raven) card);
 			else
 				_drawnOutsideSafe.add((Raven) card);
@@ -52,9 +52,9 @@ public class MemoryRow
 		return _drawnOutsideSafe;
 	}
 
-	public void updateNmbOfRavens(int nmbRavens)
+	public void updateSizeOfSafeSpace(int safeSpaceSize)
 	{
-		_numberOfRavens = nmbRavens;
+		_sizeOfSafeSpace = safeSpaceSize;
 	}
 
 	public ArrayList<MemoryCard> discardRemaining() 

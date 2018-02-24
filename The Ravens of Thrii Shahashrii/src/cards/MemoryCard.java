@@ -12,6 +12,7 @@ public class MemoryCard extends Card
 	int _value;
 	
 	Ability _ability;
+	CardColor _bufferColor; // needed for blueHighAbility
 	
 	public MemoryCard(CardColor color, boolean[][] array, int value)
 	{
@@ -119,5 +120,16 @@ public class MemoryCard extends Card
 	public Ability getAbility()
 	{
 		return _ability;
+	}
+
+	public void blueHighAbility(CardColor color)
+	{
+		_bufferColor = _color;
+		_color = color;
+	}
+	
+	public void blueHighAbilityRestoreColor()
+	{
+		_color = _bufferColor;
 	}
 }

@@ -100,4 +100,9 @@ public class Game
 	{
 		return _gui.atmanSplitOccured(arrayList);
 	}
+
+	public DiscardPile getDiscardPile()
+	{
+		return _discardPile;
+	}
 }

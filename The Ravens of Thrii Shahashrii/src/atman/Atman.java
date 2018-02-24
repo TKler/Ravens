@@ -2,6 +2,7 @@ package atman;
 
 import java.util.ArrayList;
 
+import cards.CardColor;
 import cards.MemoryCard;
 import players.Game;
 
@@ -12,6 +13,9 @@ public class Atman implements AtmanInterface
 	Game _game;
 	RelieveChecker _relieve;
 	SplitChecker _split;
+	
+	boolean _flagGreenHigh, _flagBlueHigh = false;
+	CardInAtman _blueHighChangedCard;
 
 	
 	public Atman(Game game)
@@ -21,13 +25,14 @@ public class Atman implements AtmanInterface
 		_cardsInAtman = new ArrayList<CardInAtman>();
 		_game = game;
 	}
+	
 	/**
 	 * @param
 	 * Card card the card to be placed
 	 * Corner ... the corners it is placed upon, if there is a card, the corresponding corner, if there is no card null
 	 * @return false if the card can't be placed there.
 	 * THIS IS A NONDEFINITIV CHECK. YOU CAN PROBABLY STILL PLACE THE CARD WEIRD IF YOU TRY
-	 * @assert the four corners are adjacent and in the right order etc
+	 * @assert the four corners are adjacent and in the right order etc except greenLowAbility
 	 */
 	public boolean placeCard(MemoryCard card, Corner upperLeft, Corner upperRight, Corner lowerLeft, Corner lowerRight) 
 	{
@@ -44,6 +49,9 @@ public class Atman implements AtmanInterface
 		{
 			checkForActualSplit();
 		}
+		
+		if(_flagBlueHigh)
+			_blueHighChangedCard.getCard().blueHighAbilityRestoreColor();
 		
 		return true;
 	}
@@ -106,6 +114,13 @@ public class Atman implements AtmanInterface
 	 */
 	private boolean isPlacable(MemoryCard card, Corner upperLeft, Corner upperRight, Corner lowerLeft, Corner lowerRight) 
 	{
+		if(_flagGreenHigh)
+		{
+			_flagGreenHigh = false;
+			return true;
+			//TODO osprey rules question: what are the grid rules/which checks need to be done
+		}
+		
 		if(!checkIfCardIsPlacedOnTop(createList(upperLeft, upperRight, lowerLeft, lowerRight)))
 			return false;
 		
@@ -269,5 +284,21 @@ public class Atman implements AtmanInterface
 	public ArrayList<CardInAtman> getCards()
 	{
 		return _cardsInAtman;
+	}
+
+	public void greenHighAbility()
+	{
+		_flagGreenHigh = true;
+	}
+
+	public void blueHighAbility(CardInAtman card, CardColor color)
+	{
+		_cardsInAtman.get(_cardsInAtman.indexOf(card)).getCard().blueHighAbility(color);
+		_blueHighChangedCard = card;
+	}
+
+	public void blueLowAbility(boolean trueForPlusOne)
+	{
+		_relieve.blueLowAbility(trueForPlusOne);
 	}
 }

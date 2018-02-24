@@ -18,15 +18,14 @@ import cards.Raven;
 public class Feth
 {
 	Game _game;
-	MemoryRow _memory;
+	MemoryRow _memoryRow;
 	RavenRow _ravenRow;
 	Deck _deck;
-	
 	
 	public Feth(Game game) 
 	{
 		_game = game;
-		_memory = new MemoryRow();
+		_memoryRow = new MemoryRow();
 		_deck = new Deck();
 		_ravenRow = new RavenRow();
 	}
@@ -40,7 +39,7 @@ public class Feth
 	{
 		if(_deck.isEmpty() || _ravenRow.checkForAllRavens())
 			_game.gameLost();
-		_memory.updateNmbOfRavens(_ravenRow.getNumberOfActiveRavens());
+		_memoryRow.updateSizeOfSafeSpace(_ravenRow.getNumberOfActiveRavens());
 	}
 	
 	public void drawCard() 
@@ -50,7 +49,7 @@ public class Feth
 		if(card == null)
 			_game.gameLost();
 		
-		_memory.addCard(card);
+		_memoryRow.addCard(card);
 	}
 	
 	/*
@@ -58,16 +57,16 @@ public class Feth
 	 */
 	public void endDrawing()
 	{
-		_game.discardCards(_memory.getDiscardedRavens());
-		_ravenRow.addRaven(_memory.getNewRavens());
+		_game.discardCards(_memoryRow.getDiscardedRavens());
+		_ravenRow.addRaven(_memoryRow.getNewRavens());
 	}
 	
 
 	public void discardRemainingMemoryRow() 
 	{
-		_ravenRow.discardCards(_memory.discardRemaining());
-		_game.discardCards(_memory.discardRemaining());
-		_memory.reset();
+		_ravenRow.discardCards(_memoryRow.discardRemaining());
+		_game.discardCards(_memoryRow.discardRemaining());
+		_memoryRow.reset();
 	}
 	
 	
@@ -76,12 +75,6 @@ public class Feth
 		_ravenRow.relieve(color);
 	}
 	
-	
-	public boolean useCard(Card card, int xposition, int yposition) 
-	{
-		// TODO Card Abilities
-		return false;
-	}
 	
 	/**
 	 * The way discarding at the end of the dream works is, that there are 3 sources of cards: atman, poem and discard pile
@@ -94,19 +87,21 @@ public class Feth
 	 */
 	public void endDream(ArrayList<Card> discardPile, ArrayList<MemoryCard> atmanCards, ArrayList<MemoryCard> poemCards)
 	{
-		_deck.shuffleBackIn(_ravenRow.discardCards(atmanCards));
-		_deck.shuffleBackIn(_ravenRow.discardCards(poemCards));
-		ArrayList<MemoryCard> discardPileWithoutRavens = new ArrayList<MemoryCard>();
-		ArrayList<Raven> discardedRavens = new ArrayList<Raven>();
+		ArrayList<MemoryCard> combinedMemoryList = new ArrayList<MemoryCard>();
+		
+		combinedMemoryList.addAll(atmanCards);
+		combinedMemoryList.addAll(poemCards);
+
+		ArrayList<Raven> discardedRavens = new ArrayList<Raven>(5);
 		for(Card card : discardPile)
 		{
 			if(card.isRaven())
 				discardedRavens.add((Raven) card);
 			else
-				discardPileWithoutRavens.add((MemoryCard) card);
+				combinedMemoryList.add((MemoryCard) card);
 		}
 		
-		_deck.shuffleBackIn(_ravenRow.discardCards(discardPileWithoutRavens));
+		_deck.shuffleBackIn(_ravenRow.discardCards(combinedMemoryList));
 		_deck.shuffleBackIn(discardedRavens);
 		_ravenRow.dreamEnd();
 	}
@@ -128,5 +123,22 @@ public class Feth
 	{
 		return _game.placeCardInTheAtman(card, lowerRight, lowerRight, lowerRight, lowerRight);
 	}
-		
+	
+	public void yellowHighAbility(MemoryCard card)
+	{
+		_ravenRow.yellowHighAbility(card);
+		_deck.YellowHighAbility(card);
+	}
+
+
+	public void yellowLowAbility(ArrayList<Card> cards)
+	{
+		_deck.YellowLowAbility(cards);
+	}
+
+
+	public void purpleLowAbility()
+	{
+		_memoryRow._sizeOfSafeSpace += 2;
+	}
 }

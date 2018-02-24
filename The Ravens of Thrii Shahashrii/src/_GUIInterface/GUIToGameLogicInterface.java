@@ -8,18 +8,18 @@ public interface GUIToGameLogicInterface
 {
 	/**
 	 * Called when Feth draws a Card from the deck
-	 **/
+	 */
 	public void fethDrawsACard();
 	
 	/**
 	 * This may only be allowed after at least one drawn memorycard
-	 **/
+	 */
 	public void fethFinishesDrawing();
 	
 	/**
 	 * The card and its place in the Atman
 	 * @return if this is a correct place
-	 **/
+	 */
 	public boolean placeCardInTheAtman(MemoryCard card, Corner upperLeft, Corner upperRight, Corner lowerLeft, Corner lowerRight);
 	
 	
@@ -30,8 +30,12 @@ public interface GUIToGameLogicInterface
 	
 	/**
 	 *  doubles as end of Ren turn, since every action from here on is deterministic
-	 **/
+	 */
 	public void renTakesCardFromAtman(CardInAtman card);
 	
-	
+	/**
+	 * The card that is being used
+	 * @assert correct player uses this.
+	 */
+	public void useCard(MemoryCard card, int x, int y);
 }

@@ -12,6 +12,7 @@ public class RelieveChecker
 	HashSet<CardInAtman> _discoveredSameColorCards = new HashSet<CardInAtman>();
 	int _valueSumOfCards = 0;
 	CardColor _color;
+	int _numberNeededToRelieve = 7; // this gets changes for low blue abilites
 	
 	public boolean isRelieve(CardInAtman placedCard)
 	{
@@ -27,12 +28,14 @@ public class RelieveChecker
 				_discoveredSameColorCards.addAll(findPossibleCardsUpAndDown(toTestCard));
 				_connectedSameColorCards.add(toTestCard);
 				_valueSumOfCards += toTestCard.getCard().getValue();
-				if(_valueSumOfCards > 7)
+				if(_valueSumOfCards > _numberNeededToRelieve)
 					return false;
 				_discoveredSameColorCards.remove(toTestCard);
 			}
 		}
-		return _valueSumOfCards == 7;
+		boolean result = (_valueSumOfCards == _numberNeededToRelieve);
+		_numberNeededToRelieve = 7;
+		return result;
 	}
 	
 	private HashSet<CardInAtman> findPossibleCardsUpAndDown(CardInAtman toTestCard)
@@ -105,5 +108,13 @@ public class RelieveChecker
 		if(up)
 			return c.getAbove();
 		return c.getBelow();
+	}
+
+	public void blueLowAbility(boolean trueForPlusOne)
+	{
+		if(trueForPlusOne)
+			_numberNeededToRelieve = 6;
+		else
+			_numberNeededToRelieve = 8;
 	}
 }

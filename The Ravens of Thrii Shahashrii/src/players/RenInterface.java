@@ -6,10 +6,10 @@ import cards.MemoryCard;
 
 public interface RenInterface 
 {
-	/*
-	 * may only use red and yellow
+	/**
+	 * call to manage card usage, aka switch the card
 	 */
-	public boolean useCard(MemoryCard card, int xposition, int yposition);
+	public void useCard(MemoryCard card, int xposition, int yposition);
 	
 	
 	/**

@@ -14,11 +14,13 @@ public class RavenRow
 {
 	ArrayList<Raven> _active;
 	ArrayList<Raven> _defeated;
+	ArrayList<CardColor> _deactivatedRavensForNextOccurance;
 	
 	public RavenRow()
 	{
 		_active = new ArrayList<Raven>(5);
 		_defeated = new ArrayList<Raven>(5);
+		_deactivatedRavensForNextOccurance = new ArrayList<CardColor>(5);
 	}
 	
 	public void addRaven(ArrayList<Raven> arrayList)
@@ -83,6 +85,7 @@ public class RavenRow
 	 * d) at the end of the dream, poem and atman
 	 * 
 	 * @return return the nonstolen memories
+	 * @assert gets called once for each instance of discards. meaning once for the end of the dream
 	 **/
 	public ArrayList<MemoryCard> discardCards(ArrayList<MemoryCard> discardedCards)
 	{
@@ -90,13 +93,28 @@ public class RavenRow
 		{
 			for(MemoryCard m : discardedCards)
 			{	
-				if(raven.getColor() == m.getColor())
+				if((raven.getColor() == m.getColor()) && !_deactivatedRavensForNextOccurance.contains(raven.getColor()) )
 				{
 					raven.stealMemories(m);
 					discardedCards.remove(m);
 				}
 			}
 		}
+		_deactivatedRavensForNextOccurance.clear();
 		return discardedCards;
+	}
+
+	public void yellowHighAbility(MemoryCard card)
+	{
+		for(Raven raven : _active)
+		{
+			if(raven.getColor() == card.getColor())
+				raven.yellowAbility(card);
+		}
+	}
+	
+	public void purpleHighAbility(CardColor color)
+	{
+		_deactivatedRavensForNextOccurance.add(color);
 	}
 }

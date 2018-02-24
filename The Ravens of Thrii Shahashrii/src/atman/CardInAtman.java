@@ -103,12 +103,10 @@ public class CardInAtman
 		}
 	}
 
-
 	public MemoryCard getCard() 
 	{
 		return _card;
 	}
-
 
 	public void removeThisCard() 
 	{
@@ -118,7 +116,6 @@ public class CardInAtman
 				c.removeThisCard();
 		}
 	}
-
 
 	public ArrayList<Corner> getCorners() 
 	{

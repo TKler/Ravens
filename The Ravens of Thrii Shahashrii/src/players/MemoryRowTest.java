@@ -24,8 +24,8 @@ public class MemoryRowTest
 	@Test
 	public void addCard()
 	{
-		assertEquals(_dummy._numberOfRavens, 0);
-		_dummy._numberOfRavens = 1;
+		assertEquals(_dummy._sizeOfSafeSpace, 0);
+		_dummy._sizeOfSafeSpace = 1;
 		
 		assertEquals(_dummy._drawnInsideSafe.size(), 0);
 		_dummy.addCard(_greenRaven);

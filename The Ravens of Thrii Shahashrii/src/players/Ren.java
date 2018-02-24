@@ -25,17 +25,16 @@ public class Ren implements RenInterface
 	}
 
 	/**
-	 * @assert Cards are in descending order from first row to last.
+	 * @assert Cards are in order from first row to last.
 	 */
 	public void createHeart(ArrayList<MemoryCard> heartCards)
 	{
 		_poem = new Poem(heartCards);
 	}
 
-	public boolean useCard(MemoryCard card, int xposition, int yposition) 
+	public void useCard(MemoryCard card, int xposition, int yposition) 
 	{
-		// TODO Auto-generated method stub
-		return false;
+		_poem.useCardInPoem(xposition, yposition);
 	}
 	
 	public ArrayList<MemoryCard> getHeartCards()
@@ -43,12 +42,10 @@ public class Ren implements RenInterface
 		return _poem.getHeartCards();
 	}
 
-
 	public void addCardToThePoem(MemoryCard card) 
 	{
 		if(!_poem.addToCardPoem(card))
 			_game.discardCard(card);
-			
 	}
 	
 	public void relieveHeartCard(int row)

@@ -36,10 +36,7 @@ public class Raven extends Card
 		return _stolenMemories;
 	}
 	
-	/**
-	 * can be invoked once or thrice depending on high or low
-	 */
-	public void yellowAbility(Card card)
+	public void yellowAbility(MemoryCard card)
 	{
 		_stolenMemories.remove(card);
 	}

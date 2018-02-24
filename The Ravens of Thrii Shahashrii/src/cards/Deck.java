@@ -24,7 +24,7 @@ public class Deck {
 		return _deck.pop();
 	}
 	
-	public void YellowHighAbility(Card card)
+	public void YellowHighAbility(MemoryCard card)
 	{
 		_deck.push(card);
 	}
@@ -32,7 +32,9 @@ public class Deck {
 	public void YellowLowAbility(List<Card> list)
 	{
 		for(Card c : list)
-		_deck.push(c);
+		{
+			_deck.push(c);
+		}
 	}
 
 	public boolean isEmpty() 
@@ -45,6 +47,7 @@ public class Deck {
 		_deck.addAll(discardPile);
 		shuffle();
 	}
+	
 	/**
 	 * Gets  elegible heart/atmancard (MemoryCards and no 5 values)
 	 *  Todo this crashes if there is no eligible card, veryvery unlikely, still should be fixed before shipping

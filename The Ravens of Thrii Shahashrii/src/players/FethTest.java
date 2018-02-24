@@ -26,10 +26,10 @@ public class FethTest
 	public void testStartTurn()
 	{
 		_feth.startTurn();
-		assertTrue(_feth._memory._numberOfRavens == 0);
+		assertTrue(_feth._memoryRow._sizeOfSafeSpace == 0);
 		addBlueRaven();
 		_feth.startTurn();
-		assertTrue(_feth._memory._numberOfRavens == 1);
+		assertTrue(_feth._memoryRow._sizeOfSafeSpace == 1);
 		assertTrue(_feth._ravenRow.getActiveRavens().size() == 1);
 	}
 
