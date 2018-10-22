@@ -67,7 +67,7 @@ class PoemLine
 		return _line.get(0);
 	}
 
-	public void removeCard(MemoryCard card) 
+	public void removeCard(CardInPoem card) 
 	{
 		_line.remove(card);		
 	}

@@ -73,7 +73,7 @@ public class Poem implements PoemInterface
 			if((pl.getHeartCard().getStatus() == CardStatusInPoem.USABLE) || (pl.getHeartCard().getStatus() == CardStatusInPoem.USED) )
 			{
 				score.add(pl.getHeartCard().getCard());
-				pl.removeCard(pl.getHeartCard().getCard());
+				pl.removeCard(pl.getHeartCard());
 			}
 		}
 		return score;

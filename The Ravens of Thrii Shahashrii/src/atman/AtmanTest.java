@@ -1,15 +1,18 @@
 package atman;
 
-import static org.junit.Assert.*;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.jupiter.api.Test;
 
 import cards.CardColor;
 import cards.MemoryCard;
 
 //Has GUI interaction, so be careful to neither create splits nor relieves
 
-public class AtmanTest
+public class AtmanTest 
 {
 	Atman _atman = new Atman(null);
 	MemoryCard _green1 = new MemoryCard(CardColor.GREEN, new int[][]{{0, 0},{1, 0}}, 1);
