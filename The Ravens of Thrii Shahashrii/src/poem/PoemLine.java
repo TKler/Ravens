@@ -1,10 +1,12 @@
 package poem;
 import java.util.ArrayList;
+import java.util.List;
+
 import cards.MemoryCard;
 
 class PoemLine
 {
-	ArrayList<CardInPoem> _line = new ArrayList<CardInPoem>(7);
+	List<CardInPoem> _line = new ArrayList<CardInPoem>(7);
 	int _limit;
 	int _valueSum;
 	
@@ -77,9 +79,9 @@ class PoemLine
 	 * (for discarding)
 	 * @return
 	 */
-	public ArrayList<MemoryCard> getAllCards()
+	public List<MemoryCard> getAllCards()
 	{
-		ArrayList<MemoryCard> cards = new ArrayList<MemoryCard>();
+		List<MemoryCard> cards = new ArrayList<MemoryCard>();
 		for(CardInPoem cip : _line)
 		{
 			cards.add(cip.getCard());

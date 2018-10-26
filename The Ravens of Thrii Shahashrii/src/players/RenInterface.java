@@ -1,7 +1,5 @@
 package players;
-
-import java.util.ArrayList;
-
+import java.util.List;
 import cards.MemoryCard;
 
 public interface RenInterface 
@@ -22,14 +20,14 @@ public interface RenInterface
 	 * Creates Rens heart with 4 eligible memorycards
 	 * @param list the for memorycards, first goes first and so on
 	 */
-	public void createHeart(ArrayList<MemoryCard> list);
+	public void createHeart(List<MemoryCard> list);
 
 
 	/**
 	 * the dream ends for ren, meaning her scored cards get added to the scorepile and the rest gets discarded
 	 * @return the cards to be discarded
 	 */
-	public ArrayList<MemoryCard> endDream();
+	public List<MemoryCard> endDream();
 	
 	
 	

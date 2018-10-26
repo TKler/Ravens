@@ -1,6 +1,7 @@
 package atman;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import cards.CardColor;
 import cards.MemoryCard;
@@ -9,7 +10,7 @@ import players.Game;
 public class Atman implements AtmanInterface
 {
 	
-	ArrayList<CardInAtman> _cardsInAtman;
+	List<CardInAtman> _cardsInAtman;
 	Game _game;
 	RelieveChecker _relieve;
 	SplitChecker _split;
@@ -34,6 +35,7 @@ public class Atman implements AtmanInterface
 	 * THIS IS A NONDEFINITIV CHECK. YOU CAN PROBABLY STILL PLACE THE CARD WEIRD IF YOU TRY
 	 * @assert the four corners are adjacent and in the right order etc except greenLowAbility
 	 */
+	@Override
 	public boolean placeCard(MemoryCard card, Corner upperLeft, Corner upperRight, Corner lowerLeft, Corner lowerRight) 
 	{
 		if(!isPlacable(card, upperLeft, upperRight, lowerLeft, lowerRight))
@@ -74,11 +76,11 @@ public class Atman implements AtmanInterface
 	 * Queries the GUI for the player to choose which Atman (cc) to keep
 	 * @param theCCs
 	 */
-	private void handleSplit(ArrayList<ArrayList<CardInAtman>> theCCs) 
+	private void handleSplit(List<List<CardInAtman>> theCCs) 
 	{
 		int groupToKeep = _game.atmanSplitOccured(theCCs);
 		
-		for(ArrayList<CardInAtman> list : theCCs)
+		for(List<CardInAtman> list : theCCs)
 		{
 			_cardsInAtman.removeAll(list);
 		}
@@ -88,7 +90,7 @@ public class Atman implements AtmanInterface
 	/**
 	 *	A split can only occur if one of the cards, the new one is placed upon, goes invis.
 	 */
-	private boolean splitPossiblethroughAdd(ArrayList<Corner> corners) 
+	private boolean splitPossiblethroughAdd(List<Corner> corners) 
 	{
 		for(Corner c : corners)
 		{
@@ -191,7 +193,7 @@ public class Atman implements AtmanInterface
 	 * A Card is fully placed upon another if all for corners have the same parent.
 	 * This can't be the case if any is null.
 	 */
-	private boolean checkIfCardIsPlacedFullyUponAnother(ArrayList<Corner> corners)
+	private boolean checkIfCardIsPlacedFullyUponAnother(List<Corner> corners)
 	{
 		
 		for(int i = 0; i < 4; i++)
@@ -210,7 +212,7 @@ public class Atman implements AtmanInterface
 	}
 	
 
-	private boolean checkIfCardIsPlacedOnTop(ArrayList<Corner> corners)
+	private boolean checkIfCardIsPlacedOnTop(List<Corner> corners)
 	{
 		for(Corner c : corners)
 		{
@@ -221,9 +223,9 @@ public class Atman implements AtmanInterface
 		return true;
 	}
 	
-	private ArrayList<Corner> createList(Corner upperLeft, Corner upperRight, Corner lowerLeft, Corner lowerRight)
+	private List<Corner> createList(Corner upperLeft, Corner upperRight, Corner lowerLeft, Corner lowerRight)
 	{
-		ArrayList<Corner> corners = new ArrayList<Corner>(4);
+		List<Corner> corners = new ArrayList<Corner>(4);
 		corners.add(upperLeft);
 		corners.add(upperRight);
 		corners.add(lowerLeft);
@@ -232,6 +234,7 @@ public class Atman implements AtmanInterface
 		return corners;
 	}
 	
+	@Override
 	public void removeCard(CardInAtman card) 
 	{
 		// delete from the linked lists
@@ -258,6 +261,7 @@ public class Atman implements AtmanInterface
 //		return false;
 //	}
 	
+	@Override
 	public boolean isEmpty() 
 	{
 		return _cardsInAtman.isEmpty();
@@ -272,16 +276,16 @@ public class Atman implements AtmanInterface
 	 * removes the encapsulation for the atmans cards 
 	 * @return and returns the remaining cards
 	 */
-	public ArrayList<MemoryCard> endDream()
+	public List<MemoryCard> endDream()
 	{
-		ArrayList<MemoryCard> toDiscard = new ArrayList<MemoryCard>();
+		List<MemoryCard> toDiscard = new ArrayList<MemoryCard>();
 		for(CardInAtman atmanCard : _cardsInAtman)
 		{
 			toDiscard.add(atmanCard.getCard());
 		}
 		return toDiscard;
 	}
-	public ArrayList<CardInAtman> getCards()
+	public List<CardInAtman> getCards()
 	{
 		return _cardsInAtman;
 	}

@@ -1,6 +1,7 @@
 package players;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import cards.Card;
 import cards.MemoryCard;
@@ -15,7 +16,7 @@ public class Ren implements RenInterface
 {
 	Game _game;
 	Poem _poem;
-	ArrayList<Card> _scorePile;
+	List<Card> _scorePile;
 	
 	
 	public Ren(Game game) 
@@ -27,21 +28,24 @@ public class Ren implements RenInterface
 	/**
 	 * @assert Cards are in order from first row to last.
 	 */
-	public void createHeart(ArrayList<MemoryCard> heartCards)
+	@Override
+	public void createHeart(List<MemoryCard> list)
 	{
-		_poem = new Poem(heartCards);
+		_poem = new Poem(list);
 	}
 
+	@Override
 	public void useCard(MemoryCard card, int xposition, int yposition) 
 	{
 		_poem.useCardInPoem(xposition, yposition);
 	}
 	
-	public ArrayList<MemoryCard> getHeartCards()
+	public List<MemoryCard> getHeartCards()
 	{
 		return _poem.getHeartCards();
 	}
 
+	@Override
 	public void addCardToThePoem(MemoryCard card) 
 	{
 		if(!_poem.addToCardPoem(card))
@@ -53,7 +57,8 @@ public class Ren implements RenInterface
 		_poem.revealHeartCard(row);
 	}
 		
-	public ArrayList<MemoryCard> endDream() 
+	@Override
+	public List<MemoryCard> endDream() 
 	{
 		_scorePile.addAll(_poem.getScoreCards());
 		return _poem.endOfDream();

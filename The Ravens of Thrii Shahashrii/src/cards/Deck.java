@@ -42,9 +42,9 @@ public class Deck {
 		return _deck.isEmpty();
 	}
 
-	public void shuffleBackIn(ArrayList<? extends Card> discardPile) 
+	public void shuffleBackIn(List<? extends Card> list) 
 	{
-		_deck.addAll(discardPile);
+		_deck.addAll(list);
 		shuffle();
 	}
 	
@@ -74,13 +74,12 @@ public class Deck {
 	/**
 	 * getmemoryCard 4 times with a list as return
 	 */
-	public ArrayList<MemoryCard> get4HeartCards()
+	public List<MemoryCard> get4HeartCards()
 	{
-		ArrayList<MemoryCard> heart = new ArrayList<MemoryCard>(4);
+		List<MemoryCard> heart = new ArrayList<MemoryCard>(4);
 		for(int i = 0; i < 4; i++)
-		{
 			heart.add(getNot5MemoryCard());
-		}
+
 		return heart;
 	}
 	

@@ -1,26 +1,27 @@
 package atman;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SplitChecker
 {
-	ArrayList<CardInAtman> _possibleCards;
-	ArrayList<ArrayList<CardInAtman>> _connectedComponents;
+	List<CardInAtman> _possibleCards;
+	List<List<CardInAtman>> _connectedComponents;
 	
 	/**
 	 * @assert non-empty list
-	 * @param cardsInAtman the cards in the atman
+	 * @param _cardsInAtman the cards in the atman
 	 * @return true if the atman has a split
 	 */
-	public boolean checkForSplit(ArrayList<CardInAtman> cardsInAtman)
+	public boolean checkForSplit(List<CardInAtman> _cardsInAtman)
 	{
-		initialiseAndPrune(cardsInAtman);
+		initialiseAndPrune(_cardsInAtman);
 		
 		while(! _possibleCards.isEmpty())
 		{
 			//reset lists for this iteration
-			ArrayList<CardInAtman> oneCC = new ArrayList<CardInAtman>();
-			ArrayList<CardInAtman> discover = new ArrayList<CardInAtman>();
+			List<CardInAtman> oneCC = new ArrayList<CardInAtman>();
+			List<CardInAtman> discover = new ArrayList<CardInAtman>();
 			//add the new group to the CClist
 			_connectedComponents.add(oneCC);
 			
@@ -67,23 +68,23 @@ public class SplitChecker
 
 	/**
 	 * resets the lists and deletes all invisible cards, since we dont care about them
-	 * @param cardsInAtman
+	 * @param _cardsInAtman
 	 */
 	//we could probably do without possible and just check for visibility every step, we still gotta 
 	// account for it, since pruning the atman doesnt delete the connection between the cards
-	private void initialiseAndPrune(ArrayList<CardInAtman> cardsInAtman)
+	private void initialiseAndPrune(List<CardInAtman> _cardsInAtman)
 	{
 		_possibleCards = new ArrayList<CardInAtman>();
-		_connectedComponents = new ArrayList<ArrayList<CardInAtman>>();
+		_connectedComponents = new ArrayList<List<CardInAtman>>();
 		
-		for(CardInAtman card : cardsInAtman)
+		for(CardInAtman card : _cardsInAtman)
 		{
 			if(card.isVisible())
 				_possibleCards.add(card);
 		}
 	}
 
-	public ArrayList<ArrayList<CardInAtman>> getCC()
+	public List<List<CardInAtman>> getCC()
 	{
 		return _connectedComponents;
 	}

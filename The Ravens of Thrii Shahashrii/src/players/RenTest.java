@@ -3,6 +3,7 @@ package players;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -41,7 +42,7 @@ public class RenTest
 		_purple5 = new MemoryCard(CardColor.PURPLE, new int[][]{{0, 1},{0, 1}}, 5);
 		
 		
-		ArrayList<MemoryCard> list = new ArrayList<MemoryCard>();
+		List<MemoryCard> list = new ArrayList<MemoryCard>();
 		list.add(_green3);
 		list.add(_green2);
 		list.add(_green1);

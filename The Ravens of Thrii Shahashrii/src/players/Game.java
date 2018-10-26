@@ -1,5 +1,6 @@
 package players;
 import java.util.ArrayList;
+import java.util.List;
 
 import _GUIInterface.GameLogicToGUI;
 import atman.Atman;
@@ -86,17 +87,17 @@ public class Game
 
 	public void discardCard(MemoryCard card) 
 	{
-		ArrayList<MemoryCard> list = new ArrayList<MemoryCard>(1);
+		List<MemoryCard> list = new ArrayList<MemoryCard>(1);
 		list.add(card);
 		discardCards(list);
 	}
 	
-	public void discardCards(ArrayList<? extends Card> remaining) 
+	public void discardCards(List<? extends Card> remaining) 
 	{
 		_discardPile.addAll(remaining);
 	}
 
-	public int atmanSplitOccured(ArrayList<ArrayList<CardInAtman>> arrayList)
+	public int atmanSplitOccured(List<List<CardInAtman>> arrayList)
 	{
 		return _gui.atmanSplitOccured(arrayList);
 	}

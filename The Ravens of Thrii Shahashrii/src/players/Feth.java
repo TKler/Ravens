@@ -1,6 +1,7 @@
 package players;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import atman.Corner;
 import cards.Card;
@@ -81,19 +82,17 @@ public class Feth
 	 * each may be subjected to the ravens which steal memories (before eating them)
 	 * afterwards the cards are shuffled back into the deck
 	 * Then the ravenRow needs to be reset/feasting
-	 * @param discardPile
-	 * @param atmanCards
-	 * @param poemCards
 	 */
-	public void endDream(ArrayList<Card> discardPile, ArrayList<MemoryCard> atmanCards, ArrayList<MemoryCard> poemCards)
+	public void endDream(List<Card> memoryCardList, List<MemoryCard> memoryCardList2, 
+			List<MemoryCard> ravenList)
 	{
-		ArrayList<MemoryCard> combinedMemoryList = new ArrayList<MemoryCard>();
+		List<MemoryCard> combinedMemoryList = new ArrayList<MemoryCard>();
 		
-		combinedMemoryList.addAll(atmanCards);
-		combinedMemoryList.addAll(poemCards);
+		combinedMemoryList.addAll(memoryCardList2);
+		combinedMemoryList.addAll(ravenList);
 
-		ArrayList<Raven> discardedRavens = new ArrayList<Raven>(5);
-		for(Card card : discardPile)
+		List<Raven> discardedRavens = new ArrayList<Raven>(5);
+		for(Card card : memoryCardList)
 		{
 			if(card.isRaven())
 				discardedRavens.add((Raven) card);
@@ -111,7 +110,7 @@ public class Feth
 		return _deck.getNot5MemoryCard();
 	}
 	
-	public ArrayList<MemoryCard> getHeartCardsForRen()
+	public List<MemoryCard> getHeartCardsForRen()
 	{
 		startTurn();
 		return _deck.get4HeartCards();
@@ -131,7 +130,7 @@ public class Feth
 	}
 
 
-	public void yellowLowAbility(ArrayList<Card> cards)
+	public void yellowLowAbility(List<Card> cards)
 	{
 		_deck.YellowLowAbility(cards);
 	}

@@ -1,5 +1,6 @@
 package players;
 import java.util.ArrayList;
+import java.util.List;
 
 import cards.Card;
 import cards.MemoryCard;
@@ -13,9 +14,9 @@ import cards.Raven;
 public class MemoryRow 
 {
 	int _cardsDrawn, _sizeOfSafeSpace;
-	ArrayList<MemoryCard> _list;
-	ArrayList<Raven> _drawnInsideSafe;
-	ArrayList<Raven> _drawnOutsideSafe;
+	List<MemoryCard> _list;
+	List<Raven> _drawnInsideSafe;
+	List<Raven> _drawnOutsideSafe;
 	
 	
 	public MemoryRow()
@@ -42,12 +43,12 @@ public class MemoryRow
 			_list.add((MemoryCard) card);
 	}
 
-	public ArrayList<Raven> getDiscardedRavens() 
+	public List<Raven> getDiscardedRavens() 
 	{
 		return _drawnInsideSafe;
 	}
 
-	public ArrayList<Raven> getNewRavens() 
+	public List<Raven> getNewRavens() 
 	{
 		return _drawnOutsideSafe;
 	}
@@ -57,7 +58,7 @@ public class MemoryRow
 		_sizeOfSafeSpace = safeSpaceSize;
 	}
 
-	public ArrayList<MemoryCard> discardRemaining() 
+	public List<MemoryCard> discardRemaining() 
 	{
 		return _list;
 	}

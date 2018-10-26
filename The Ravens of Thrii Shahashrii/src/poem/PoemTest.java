@@ -3,6 +3,7 @@ package poem;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -64,7 +65,7 @@ public class PoemTest
 		_dummyPoem.revealHeartCard(2);
 		_dummyPoem.useCardInPoem(0, 2);
 		
-		ArrayList<MemoryCard> list = _dummyPoem.getScoreCards();
+		List<MemoryCard> list = _dummyPoem.getScoreCards();
 		
 		assertTrue(list.contains(_green2));
 		assertTrue(list.contains(_green1));
@@ -77,7 +78,7 @@ public class PoemTest
 		_dummyPoem.addToCardPoem(_purple4);
 		_dummyPoem.addToCardPoem(_purple5);
 		
-		ArrayList<MemoryCard> list = _dummyPoem.endOfDream();
+		List<MemoryCard> list = _dummyPoem.endOfDream();
 		
 		assertTrue(list.contains(_green1));
 		assertTrue(list.contains(_purple5));

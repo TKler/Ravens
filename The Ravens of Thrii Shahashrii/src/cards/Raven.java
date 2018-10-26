@@ -13,6 +13,7 @@ public class Raven extends Card
 		_stolenMemories = new ArrayList<MemoryCard>();
 	}
 
+	@Override
 	public boolean isRaven()
 	{
 		return true;

@@ -3,6 +3,7 @@ package players;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,7 +49,7 @@ public class FethTest
 		Raven raven = _feth._ravenRow._active.remove(0);
 		_feth._game._discardPile.add(raven);
 		
-		ArrayList<MemoryCard> list = new ArrayList<MemoryCard>();
+		List<MemoryCard> list = new ArrayList<MemoryCard>();
 		
 		_feth.endDream(_feth._game._discardPile._list, list, list);
 		
@@ -57,7 +58,7 @@ public class FethTest
 
 	private void addBlueRaven()
 	{
-		ArrayList<Raven> list = new ArrayList<Raven>();
+		List<Raven> list = new ArrayList<Raven>();
 		list.add(_blueRaven);
 		_feth._ravenRow.addRaven(list);
 	}

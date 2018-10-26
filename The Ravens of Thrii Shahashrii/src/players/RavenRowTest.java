@@ -1,9 +1,8 @@
 package players;
 
 import static org.junit.Assert.*;
-
 import java.util.ArrayList;
-
+import java.util.List;
 import org.junit.Test;
 
 import cards.CardColor;
@@ -16,7 +15,7 @@ public class RavenRowTest
 	Raven _blueRaven = new Raven(CardColor.BLUE);
 	Raven _greenRaven = new Raven(CardColor.GREEN);
 	RavenRow _dummy = new RavenRow();
-	ArrayList<Raven> _ravenList = new ArrayList<Raven>();
+	List<Raven> _ravenList = new ArrayList<Raven>();
 	
 	MemoryCard _blue3 = new MemoryCard(CardColor.BLUE, new int[][]{{0, 0},{1, 1}}, 3);
 	MemoryCard _blue4 = new MemoryCard(CardColor.BLUE, new int[][]{{1, 1},{0, 0}}, 4);
@@ -47,7 +46,7 @@ public class RavenRowTest
 	
 	public void discardCards()
 	{
-		ArrayList<MemoryCard> list = new ArrayList<MemoryCard>();
+		List<MemoryCard> list = new ArrayList<MemoryCard>();
 		list.add(_blue4);
 		list.add(_blue5);
 		list.add(_red3);

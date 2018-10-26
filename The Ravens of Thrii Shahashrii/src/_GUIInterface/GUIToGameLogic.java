@@ -50,6 +50,7 @@ public class GUIToGameLogic implements GUIToGameLogicInterface
 		_game.renTakesCardFromAtman(card);
 	}
 	
+	@Override
 	public void useCard(MemoryCard card, int xposition, int yposition)
 	{
 		_ren.useCard(card, xposition, yposition);

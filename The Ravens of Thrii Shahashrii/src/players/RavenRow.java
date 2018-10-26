@@ -1,6 +1,7 @@
 package players;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import cards.Raven;
 import cards.CardColor;
@@ -12,9 +13,9 @@ import cards.MemoryCard;
 
 public class RavenRow 
 {
-	ArrayList<Raven> _active;
-	ArrayList<Raven> _defeated;
-	ArrayList<CardColor> _deactivatedRavensForNextOccurance;
+	List<Raven> _active;
+	List<Raven> _defeated;
+	List<CardColor> _deactivatedRavensForNextOccurance;
 	
 	public RavenRow()
 	{
@@ -23,9 +24,9 @@ public class RavenRow
 		_deactivatedRavensForNextOccurance = new ArrayList<CardColor>(5);
 	}
 	
-	public void addRaven(ArrayList<Raven> arrayList)
+	public void addRaven(List<Raven> list)
 	{
-		_active.addAll(arrayList);
+		_active.addAll(list);
 	}
 	
 	public void relieve(CardColor color)
@@ -72,7 +73,7 @@ public class RavenRow
 		return _active.size();
 	}
 
-	public ArrayList<Raven> getActiveRavens() 
+	public List<Raven> getActiveRavens() 
 	{
 		return _active;
 	}
@@ -87,21 +88,21 @@ public class RavenRow
 	 * @return return the nonstolen memories
 	 * @assert gets called once for each instance of discards. meaning once for the end of the dream
 	 **/
-	public ArrayList<MemoryCard> discardCards(ArrayList<MemoryCard> discardedCards)
+	public List<MemoryCard> discardCards(List<MemoryCard> combinedMemoryList)
 	{
 		for(Raven raven : _active)
 		{
-			for(MemoryCard m : discardedCards)
+			for(MemoryCard m : combinedMemoryList)
 			{	
 				if((raven.getColor() == m.getColor()) && !_deactivatedRavensForNextOccurance.contains(raven.getColor()) )
 				{
 					raven.stealMemories(m);
-					discardedCards.remove(m);
+					combinedMemoryList.remove(m);
 				}
 			}
 		}
 		_deactivatedRavensForNextOccurance.clear();
-		return discardedCards;
+		return combinedMemoryList;
 	}
 
 	public void yellowHighAbility(MemoryCard card)

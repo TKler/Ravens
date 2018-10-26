@@ -3,6 +3,7 @@ package players;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +35,7 @@ public class GameTest
 		_feth = _game._feth;
 		_atman = _game._atman;
 		
-		ArrayList<MemoryCard> list = new ArrayList<MemoryCard>(4);
+		List<MemoryCard> list = new ArrayList<MemoryCard>(4);
 		list.add(_green2);
 		list.add(_green3);
 		list.add(_green1);

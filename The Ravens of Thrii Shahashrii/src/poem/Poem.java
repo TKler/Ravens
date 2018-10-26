@@ -1,5 +1,6 @@
 package poem;
 import java.util.ArrayList;
+import java.util.List;
 
 import cards.MemoryCard;
 
@@ -15,23 +16,24 @@ public class Poem implements PoemInterface
 {
 	
 	int _activeLine;
-	ArrayList<PoemLine> _poem; 
-	ArrayList<MemoryCard> _heartCards;
+	List<PoemLine> _poem; 
+	List<MemoryCard> _heartCards;
 	
-	public Poem(ArrayList<MemoryCard> heartCards)
+	public Poem(List<MemoryCard> list)
 	{
-		_heartCards = heartCards;
+		_heartCards = list;
 		_poem = new ArrayList<PoemLine>(4);
 		
-		_poem.add(new PoemLine(7, heartCards.get(0)));
-		_poem.add(new PoemLine(7, heartCards.get(1)));
-		_poem.add(new PoemLine(7, heartCards.get(2)));
-		_poem.add(new PoemLine(5, heartCards.get(3)));
+		_poem.add(new PoemLine(7, list.get(0)));
+		_poem.add(new PoemLine(7, list.get(1)));
+		_poem.add(new PoemLine(7, list.get(2)));
+		_poem.add(new PoemLine(5, list.get(3)));
 		
 		_activeLine = 0;
 	}
 	
 	
+	@Override
 	public boolean addToCardPoem(MemoryCard card)
 	{
 		boolean result = _poem.get(_activeLine).addCardToLine(card);
@@ -48,26 +50,29 @@ public class Poem implements PoemInterface
 	}
 
 	
+	@Override
 	public MemoryCard getCardAt(int xposition, int yposition)
 	{
 		return _poem.get(yposition).getCard(xposition);
 	}
 	
 	
+	@Override
 	public void useCardInPoem(int xposition, int yposition)
 	{
 		_poem.get(yposition).useCard(xposition);
 	}
 	
 	
+	@Override
 	public void revealHeartCard(int row)
 	{
 		_poem.get(row).revealHeartCard();
 	}
 	
-	public ArrayList<MemoryCard> getScoreCards() 
+	public List<MemoryCard> getScoreCards() 
 	{
-		ArrayList<MemoryCard> score = new ArrayList<MemoryCard>();
+		List<MemoryCard> score = new ArrayList<MemoryCard>();
 		for(PoemLine pl : _poem)
 		{
 			if((pl.getHeartCard().getStatus() == CardStatusInPoem.USABLE) || (pl.getHeartCard().getStatus() == CardStatusInPoem.USED) )
@@ -82,9 +87,9 @@ public class Poem implements PoemInterface
 	/**
 	 * @assert getScoreCards is called before
 	 */
-	public ArrayList<MemoryCard> endOfDream()
+	public List<MemoryCard> endOfDream()
 	{
-		ArrayList<MemoryCard> remaining = new ArrayList<MemoryCard>();
+		List<MemoryCard> remaining = new ArrayList<MemoryCard>();
 		
 		for(PoemLine pl : _poem)
 		{
@@ -94,7 +99,7 @@ public class Poem implements PoemInterface
 		return remaining;
 	}
 
-	public ArrayList<MemoryCard> getHeartCards()
+	public List<MemoryCard> getHeartCards()
 	{
 		return _heartCards;
 	}
