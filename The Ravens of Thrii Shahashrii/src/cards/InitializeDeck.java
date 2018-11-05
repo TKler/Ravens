@@ -2,7 +2,7 @@ package cards;
 
 import java.util.Stack;
 
-public final class InitializeDeck 
+public class InitializeDeck 
 {
 	public static Stack<Card> createFullDeckAsList()
 	{

@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,19 +18,19 @@ public class DeckTest
 	
 	
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		 _dummy = new Deck();
 	}
 	
 	@Test
-	public void all40Cards()
+	void all40Cards()
 	{
 		assertEquals(_dummy._deck.size(), 40);
 	}
 	
 	@Test
-	public void testGetNot5MemoryCard()
+	void testGetNot5MemoryCard()
 	{
 		_dummy._deck.push(_purple5);
 		_dummy._deck.push(_redRaven);
@@ -38,7 +39,7 @@ public class DeckTest
 	}
 
 	@Test
-	public void shuffleBackIn()
+	void shuffleBackIn()
 	{ 
 		_dummy._deck.remove(_purple5);
 		_dummy._deck.remove(_redRaven);
@@ -49,5 +50,18 @@ public class DeckTest
 		_dummy.shuffleBackIn(list);
 		
 		assertTrue(_dummy._deck.contains(_purple5));
+	}
+	
+	@Test
+	void heartCards()
+	{
+		for(int i = 0; i < 7; i++) // 40 cards out of which 30 can be heartcards
+		{
+			List<MemoryCard> heart = _dummy.get4HeartCards();
+			for(MemoryCard c: heart)
+			{
+				assertTrue(c.getValue() < 5);
+			}
+		}
 	}
 }
