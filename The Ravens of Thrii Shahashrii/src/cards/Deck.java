@@ -11,7 +11,6 @@ import java.util.Stack;
 public class Deck {
 	
 	Stack<Card> _deck = new Stack<Card>();
-
 	
 	public Deck()
 	{

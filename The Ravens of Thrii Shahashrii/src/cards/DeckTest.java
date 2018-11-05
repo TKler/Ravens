@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class DeckTest
@@ -16,7 +16,7 @@ public class DeckTest
 	Raven _redRaven = new Raven(CardColor.RED);
 	
 	
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		 _dummy = new Deck();

@@ -4,18 +4,10 @@ import java.util.Stack;
 
 public final class InitializeDeck 
 {
-	static Stack<Card> list = new Stack<Card>();
-	/*
-	 * dirty workaround i know
-	 */
 	public static Stack<Card> createFullDeckAsList()
 	{
 		Stack<Card> deck = new Stack<Card>();
 		
-		if(list.size() != 0)
-		{
-			list = new Stack<Card>();
-		}
 		deck.addAll(createRavens());
 		deck.addAll(createBlues());
 		deck.addAll(createYellows());
