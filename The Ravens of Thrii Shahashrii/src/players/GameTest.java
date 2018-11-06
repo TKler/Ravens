@@ -74,7 +74,8 @@ public class GameTest
 	@Test
 	public void testEndDream()
 	{
-		fail("THIS IS A REMINDER! Nothing here is really tested, since most everything has gui interatction.");
+		fail("THIS IS A REMINDER! Nothing here is really tested, "
+				+ "since most everything has gui interatction.");
 	}
 
 }
