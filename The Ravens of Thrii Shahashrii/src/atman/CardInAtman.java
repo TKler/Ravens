@@ -1,6 +1,7 @@
 package atman;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import cards.CardColor;
 import cards.MemoryCard;
@@ -16,7 +17,7 @@ public class CardInAtman
 	// the 4 corners with additional information
 	Corner _upperLeft, _upperRight, _lowerLeft, _lowerRight;
 	//The corners this card
-	ArrayList<Corner> _cornersAsList;
+	List<Corner> _cornersAsList;
 	
 	public CardInAtman(MemoryCard card, Corner upperLeft, Corner upperRight, Corner lowerLeft, Corner lowerRight) 
 	{
@@ -117,7 +118,7 @@ public class CardInAtman
 		}
 	}
 
-	public ArrayList<Corner> getCorners() 
+	public List<Corner> getCorners() 
 	{
 		return _cornersAsList;
 	}

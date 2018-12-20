@@ -1,8 +1,9 @@
 package atman;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -27,7 +28,7 @@ public class CardInAtmanTest
 		assertTrue(dummy.isVisible());
 		assertTrue(dummy.isLowest());
 		
-		ArrayList<Corner> corners = dummy.getCorners();
+		List<Corner> corners = dummy.getCorners();
 		for(Corner c : corners)
 		{
 			assertTrue(c.isCardVisible());

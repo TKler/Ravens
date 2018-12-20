@@ -1,15 +1,14 @@
 package atman;
 
 import java.util.HashSet;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.Set;
 
 import cards.CardColor;
 
 public class RelieveChecker
 {
-	HashSet<CardInAtman> _connectedSameColorCards = new HashSet<CardInAtman>();
-	HashSet<CardInAtman> _discoveredSameColorCards = new HashSet<CardInAtman>();
+	Set<CardInAtman> _connectedSameColorCards = new HashSet<CardInAtman>();
+	Set<CardInAtman> _discoveredSameColorCards = new HashSet<CardInAtman>();
 	int _valueSumOfCards = 0;
 	CardColor _color;
 	int _numberNeededToRelieve = 7; // this gets changes for low blue abilites
@@ -21,16 +20,17 @@ public class RelieveChecker
 		
 		while(!_discoveredSameColorCards.isEmpty())
 		{
-			@SuppressWarnings("unchecked")
-			HashSet<CardInAtman> thisIteration = (HashSet<CardInAtman>) _discoveredSameColorCards.clone();
-			for(CardInAtman toTestCard : thisIteration)
+			Set<CardInAtman> thisIteration = new HashSet<CardInAtman>();
+			thisIteration.addAll(_discoveredSameColorCards);
+			
+			for(CardInAtman toBeCheckedCard : thisIteration)
 			{
-				_discoveredSameColorCards.addAll(findPossibleCardsUpAndDown(toTestCard));
-				_connectedSameColorCards.add(toTestCard);
-				_valueSumOfCards += toTestCard.getCard().getValue();
+				_discoveredSameColorCards.addAll(findPossibleCardsUpAndDown(toBeCheckedCard));
+				_connectedSameColorCards.add(toBeCheckedCard);
+				_valueSumOfCards += toBeCheckedCard.getCard().getValue();
 				if(_valueSumOfCards > _numberNeededToRelieve)
 					return false;
-				_discoveredSameColorCards.remove(toTestCard);
+				_discoveredSameColorCards.remove(toBeCheckedCard);
 			}
 		}
 		boolean result = (_valueSumOfCards == _numberNeededToRelieve);
@@ -38,18 +38,19 @@ public class RelieveChecker
 		return result;
 	}
 	
-	private HashSet<CardInAtman> findPossibleCardsUpAndDown(CardInAtman toTestCard)
+	private Set<CardInAtman> findPossibleCardsUpAndDown(CardInAtman toBeCheckedCard)
 	{
-		//srsly?
-		return (HashSet<CardInAtman>) Stream.concat(findPossibleCards(toTestCard, false).stream(), findPossibleCards(toTestCard, true).stream()).collect(Collectors.toSet());
+		Set<CardInAtman> result = new HashSet<CardInAtman>();
+		result.addAll(findPossibleCards(toBeCheckedCard, false));
+		result.addAll(findPossibleCards(toBeCheckedCard, true));
+		return result;
 	}
 
 	/**
 	 * Find cards below or above, based on up, that share the same color
-	 * @param toBeCheckedCard
-	 * @param up
+	 * @param up true for up false for down
 	 */
-	private HashSet<CardInAtman> findPossibleCards(CardInAtman toBeCheckedCard, boolean up)		
+	private Set<CardInAtman> findPossibleCards(CardInAtman toBeCheckedCard, boolean up)		
 	{
 		HashSet<CardInAtman> newCards = new HashSet<CardInAtman>();
 		for(Corner c : toBeCheckedCard.getCorners())
@@ -72,9 +73,9 @@ public class RelieveChecker
 	/**
 	 * checks whether there is a another false colored card between the checkedCard and the results thus making the card ineligible
 	 * From the placed card go down/up until you find the added cards, or you hit the ceiling/bottom. 
-	 * If you find a wrong colored visible card inbetween set a flag and consecutively remove the card from the set.
+	 * If you find a wrong colored visible card in between set a flag and consecutively remove the card from the set.
 	 */
-	private HashSet<CardInAtman> checkIfNewCardsAreElegible(HashSet<CardInAtman> newCards, CardInAtman checkedCard, boolean up)		
+	private Set<CardInAtman> checkIfNewCardsAreElegible(HashSet<CardInAtman> newCards, CardInAtman checkedCard, boolean up)		
 	{
 		boolean flagWrongColorCardInBetween = false;
 		
@@ -107,7 +108,8 @@ public class RelieveChecker
 	{
 		if(up)
 			return c.getAbove();
-		return c.getBelow();
+		else
+			return c.getBelow();
 	}
 
 	public void blueLowAbility(boolean trueForPlusOne)
